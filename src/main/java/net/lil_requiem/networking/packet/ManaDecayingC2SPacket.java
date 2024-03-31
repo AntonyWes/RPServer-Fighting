@@ -4,12 +4,15 @@ import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.lil_requiem.util.IEntityDataSaver;
 import net.lil_requiem.util.ManaData;
+import net.minecraft.block.Blocks;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
 
 public class ManaDecayingC2SPacket {
     private static final String MESSAGE_DECAYING_WATER = "message.rpserver-fighting.mana_decaying";
@@ -17,8 +20,9 @@ public class ManaDecayingC2SPacket {
 
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
-        ManaData.removeMana(((IEntityDataSaver) player), 1);
-        player.sendMessage(Text.literal("Mana: " + ((IEntityDataSaver) player).getPersistentData().getInt("mana")));
-
+        if (player instanceof IEntityDataSaver playerDataSaver) {
+                ManaData.removeMana(playerDataSaver, 1);
+                System.out.println(String.valueOf(playerDataSaver.getPersistentData().getInt("mana")));
+            }
     }
 }

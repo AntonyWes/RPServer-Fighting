@@ -1,8 +1,10 @@
 package net.lil_requiem.networking;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.lil_requiem.RPServerFighting;
 import net.lil_requiem.networking.packet.ManaDecayingC2SPacket;
+import net.lil_requiem.networking.packet.ManaSyncDataS2CPacket;
 import net.minecraft.util.Identifier;
 
 public class ModMessages {
@@ -14,6 +16,6 @@ public class ModMessages {
     }
 
     public static void registerS2CPackets() {
-
+        ClientPlayNetworking.registerGlobalReceiver(MANA_SYNC_ID, ManaSyncDataS2CPacket::receive);
     }
 }

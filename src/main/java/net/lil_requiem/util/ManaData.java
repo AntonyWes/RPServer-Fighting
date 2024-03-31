@@ -1,6 +1,11 @@
 package net.lil_requiem.util;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.lil_requiem.networking.ModMessages;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public class ManaData {
     public static int addMana(IEntityDataSaver player, int amount) {
@@ -13,7 +18,7 @@ public class ManaData {
         }
 
         nbt.putInt("mana", mana);
-        // sync the data
+        syncMana(mana, (ServerPlayerEntity) player);
         return mana;
     }
 
@@ -27,8 +32,14 @@ public class ManaData {
         }
 
         nbt.putInt("mana", mana);
-        // syncThirst(thirst, (ServerPlayerEntity) player);
+        syncMana(mana, (ServerPlayerEntity) player);
         return mana;
+    }
+
+    public static void syncMana(int mana, ServerPlayerEntity player) {
+        PacketByteBuf buffer = PacketByteBufs.create();
+        buffer.writeInt(mana);
+        ServerPlayNetworking.send(player, ModMessages.MANA_SYNC_ID, buffer);
     }
 
 }
