@@ -35,15 +35,15 @@ public class ManaHudOverlay implements HudRenderCallback {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, EMPTY_MANA);
         for(int i = 0; i < 10; i++) {
-            drawContext.drawTexture(EMPTY_MANA,x - 94 + (i * 9),y - 54,0,0,12,12,
-                    12,12);
+            drawContext.drawTexture(EMPTY_MANA,x - 94 + (i * 9),y - 54,0,0,8,8,
+                    8,8);
         }
 
         RenderSystem.setShaderTexture(0, FILLED_MANA);
         for(int i = 0; i < 10; i++) {
-            if(((IEntityDataSaver) MinecraftClient.getInstance().player).getPersistentData().getInt("thirst") > i) {
-                drawContext.drawTexture(FILLED_MANA,x - 94 + (i * 9),y - 54,0,0,12,12,
-                        12,12);
+            if(((IEntityDataSaver) MinecraftClient.getInstance().player).getPersistentData().getInt("mana") > i) {
+                drawContext.drawTexture(FILLED_MANA,x - 94 + (i * 9),y - 54,0,0,8,8,
+                        8,8);
             } else {
                 break;
             }

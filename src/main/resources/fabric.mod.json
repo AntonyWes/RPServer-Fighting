@@ -18,6 +18,9 @@
 		"main": [
 			"net.lil_requiem.RPServerFighting"
 		],
+		"client": [
+			"net.lil_requiem.RPServerFightingClient"
+		],
 		"fabric-datagen": [
 			"net.lil_requiem.RPServerFightingDataGenerator"
 		]
