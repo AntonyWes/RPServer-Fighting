@@ -13,7 +13,7 @@ public class SipetrModel extends GeoModel<Sipetr> {
 
     @Override
     public Identifier getTextureResource(Sipetr animatable) {
-        return new Identifier(RPServerFighting.MODID, "textures/item/sipetr.png");
+        return new Identifier(RPServerFighting.MODID, "textures/item/sipetr_3d.png");
     }
 
     @Override

@@ -1,8 +1,17 @@
 package net.lil_requiem.item.custom;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.lil_requiem.item.client.SipetrRenderer;
+import net.lil_requiem.networking.ModMessages;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -20,6 +29,14 @@ public class Sipetr extends Item implements GeoItem {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+//        if (user.isSneaking()){
+//
+//        }
+        return super.use(world, user, hand);
+    }
 
     public Sipetr(Settings settings) {
         super(settings);
